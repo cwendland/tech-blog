@@ -30,7 +30,12 @@ Blog.init(
             model: 'user',
             key: 'id',
       },
-    }
+    },
+    //TODO Add creator name
+    creator_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
   },
   {
     sequelize,
