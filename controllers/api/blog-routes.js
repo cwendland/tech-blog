@@ -3,11 +3,16 @@ const { User, Blog } = require('../../models');
 
 router.post('/', async (req,res) => {
     try{ 
+        const dbUserData = await User.findOne({
+          where: {
+            id: req.session.user_id,
+          },
+        });
         const dbBlogData = await Blog.create({
             title: req.body.title,
             post_body: req.body.post_body,
             creator_id: req.session.user_id,
-            creator_name: req.body.creator_name,
+            creator_name: dbUserData.name,
         });
 
         res.status(200).json(dbBlogData);

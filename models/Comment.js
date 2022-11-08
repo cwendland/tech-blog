@@ -11,14 +11,13 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      default: DataTypes.NOW,
-    },
     comment_body: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    date_created: {
+      type: DataTypes.DATE,
+      default: DataTypes.NOW,
     },
     blog_id: {
         type: DataTypes.INTEGER,
@@ -27,12 +26,9 @@ Comment.init(
             key: 'id',
         },
     },
-    creator_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'user',
-            key: 'id',
-      },
+    creator_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {

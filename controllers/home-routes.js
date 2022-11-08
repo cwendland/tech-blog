@@ -11,8 +11,9 @@ router.get('/', async (req,res) => {
     );
     res.render('homepage', {
       blogPosts,
-      loggedIn: req.session.loggedIn,
+      logged_in: req.session.loggedIn 
     });
+    //res.json(blogPosts);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -31,7 +32,10 @@ router.get('/posts/:id', async (req, res) => {
     });
 
     const post = dbPostData.get({ plain: true });
-    res.render('single-post', post);
+    res.render('single-post', {
+      post,
+      logged_in: req.session.loggedIn
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -40,9 +44,9 @@ router.get('/posts/:id', async (req, res) => {
 
 
 //GET one user
-router.get('/users/:id', async(req,res) => {
+router.get('/dashboard', async(req,res) => {
     try{
-        const dbUserData = await User.findByPk(req.params.id, {
+        const dbUserData = await User.findByPk(req.session.user_id, {
             include: [
                 {
                     model: Blog,
@@ -52,6 +56,7 @@ router.get('/users/:id', async(req,res) => {
         });
 
         const user = dbUserData.get({plain:true});
+        console.log(user);
         res.render('dashboard', user);
     } catch (err) {
         console.log(err);

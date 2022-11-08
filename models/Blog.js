@@ -17,7 +17,6 @@ Blog.init(
     },
     date_created: {
       type: DataTypes.DATE,
-      allowNull: false,
       default: DataTypes.NOW,
     },
     post_body: {
@@ -34,7 +33,6 @@ Blog.init(
     //TODO Add creator name
     creator_name: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
   },
   {
